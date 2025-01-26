@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naldo King - New Song</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 Coup Fatal </h1>
+    <p>en téléchargement gratuit en bas!</p>
+
+    <!-- Audio Player -->
+    <div class="player">
+      <audio id="audioPlayer" controls>
+        <source src="assets/naldo_king_new_song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- Counters -->
+    <div class="counters">
+      <p>Plays: <span id="playCount">0</span></p>
+      <p>Downloads: <span id="downloadCount">0</span></p>
+    </div>
+
+    <!-- Download Button -->
+    <div class="actions">
+      <a id="downloadButton" href="assets/coupfatal.mp3" download="Naldo_King_New_Song.mp3">⬇️ Download Song</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

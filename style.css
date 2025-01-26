@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url("assets/background.jpg"); /* Path to your background image */
+    background-size: cover; /* Makes the image cover the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    color: #ffffff; /* Changes text color to contrast with the background */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background for readability */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .player {
+    margin: 20px 0;
+  }
+  
+  .counters {
+    margin: 20px 0;
+  }
+  
+  .counters span {
+    font-weight: bold;
+  }
+  
+  .actions a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+  
+  .actions a:hover {
+    background: #0056b3;
+  }
+
+  

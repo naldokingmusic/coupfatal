@@ -1,27 +1,27 @@
-// Get stored play count from localStorage
-let playCount: number = parseInt(localStorage.getItem("playCount") || "0");
-let downloadCount: number = parseInt(localStorage.getItem("downloadCount") || "0");
+// Get elements
+const playCountElem = document.getElementById('playCount') as HTMLElement;
+const downloadCountElem = document.getElementById('downloadCount') as HTMLElement;
+const audioElem = document.getElementById('audio') as HTMLAudioElement;
+const downloadLink = document.getElementById('downloadLink') as HTMLAnchorElement;
 
-// Update DOM with initial values
-const playCountElement = document.getElementById("playCount") as HTMLElement;
-const downloadCountElement = document.getElementById("downloadCount") as HTMLElement;
-playCountElement.textContent = playCount.toString();
-downloadCountElement.textContent = downloadCount.toString();
+// Initialize counts from localStorage
+let playCount: number = localStorage.getItem('playCount') ? parseInt(localStorage.getItem('playCount')!) : 0;
+let downloadCount: number = localStorage.getItem('downloadCount') ? parseInt(localStorage.getItem('downloadCount')!) : 0;
 
-// Select audio player and download button
-const audioPlayer = document.getElementById("audioPlayer") as HTMLAudioElement;
-const downloadButton = document.getElementById("downloadButton") as HTMLAnchorElement;
+// Update the display with the counts
+playCountElem.textContent = playCount.toString();
+downloadCountElem.textContent = downloadCount.toString();
 
-// Increment play count and save to localStorage
-audioPlayer.addEventListener("play", () => {
+// Update the localStorage and counts when the song is played
+audioElem.addEventListener('play', () => {
   playCount++;
-  playCountElement.textContent = playCount.toString();
-  localStorage.setItem("playCount", playCount.toString());
+  localStorage.setItem('playCount', playCount.toString());
+  playCountElem.textContent = playCount.toString();
 });
 
-// Increment download count and save to localStorage
-downloadButton.addEventListener("click", () => {
+// Update the download count when the song is downloaded
+downloadLink.addEventListener('click', () => {
   downloadCount++;
-  downloadCountElement.textContent = downloadCount.toString();
-  localStorage.setItem("downloadCount", downloadCount.toString());
+  localStorage.setItem('downloadCount', downloadCount.toString());
+  downloadCountElem.textContent = downloadCount.toString();
 });

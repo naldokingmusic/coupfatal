@@ -1,0 +1,14 @@
+{
+  "name": "song-play-count",
+  "version": "1.0.0",
+  "description": "Static site for counting plays and downloads of Naldo King's song",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "open index.html"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}

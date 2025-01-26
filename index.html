@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Naldo King - New Song</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Stats</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🎵 Coup Fatal </h1>
-    <p>en téléchargement gratuit en bas!</p>
-
-<audio id="audioPlayer" controls preload="auto">
-  <source src="assets/coupfatal.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-    <!-- Counters -->
-    <div class="counters">
-      <p>Plays: <span id="playCount">0</span></p>
-      <p>Downloads: <span id="downloadCount">0</span></p>
+    <h1>Listen to Naldo King's New Song</h1>
+    
+    <div class="audio-player">
+      <audio id="audio" controls>
+        <source src="assets/coupfatal.mp3" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
 
-    <!-- Download Button -->
+    <div class="stats">
+      <p>🎧 Plays: <span id="playCount">0</span></p>
+      <p>📥 Downloads: <span id="downloadCount">0</span></p>
+    </div>
+
     <div class="actions">
-      <a id="downloadButton" href="assets/coupfatal.mp3" download="Naldo King | Coup Fatal.mp3">⬇️ Télécharge maintenant! </a>
+      <a href="assets/song.mp3" download id="downloadLink">Télécharge ICI!</a>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="dist/script.js"></script> <!-- Compiled TypeScript file -->
 </body>
 </html>

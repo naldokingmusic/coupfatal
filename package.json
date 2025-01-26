@@ -1,14 +1,18 @@
 {
-  "name": "song-play-count",
+  "name": "naldo-king-song-website",
   "version": "1.0.0",
   "description": "Static site for counting plays and downloads of Naldo King's song",
+  "homepage": "https://naldokingmusic.github.io/coupfatal",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "open index.html"
+    "start": "open index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "gh-pages": "^3.2.3"
   },
   "dependencies": {}
 }

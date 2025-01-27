@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true
+    "typeRoots": ["node_modules/@type"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".", // Enable relative paths
+    "paths": {
+      "*": ["node_modules/*"] // Ensure node_modules is resolved
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

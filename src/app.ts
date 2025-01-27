@@ -3,8 +3,8 @@ const playCountDisplay = document.getElementById('playCount') as HTMLSpanElement
 const downloadCountDisplay = document.getElementById('downloadCount') as HTMLSpanElement;
 const audioPlayer = document.getElementById('audioPlayer') as HTMLAudioElement;
 
-let playCount: number = parseInt(localStorage.getItem('playCount') || '0');
-let downloadCount: number = parseInt(localStorage.getItem('downloadCount') || '0');
+let playCount: number = 0;
+let downloadCount: number = 0;
 let playTimeout: number | undefined;
 let hasPlayed30Seconds: boolean = false;
 
@@ -12,44 +12,39 @@ let hasPlayed30Seconds: boolean = false;
 function updateCounts(): void {
     playCountDisplay.textContent = playCount.toString();
     downloadCountDisplay.textContent = downloadCount.toString();
-    localStorage.setItem('playCount', playCount.toString());
-    localStorage.setItem('downloadCount', downloadCount.toString());
 }
 
-// Function to increment play count
-function incrementPlayCount(): void {
+// Fetch counts from server
+async function fetchCounts() {
+    const response = await fetch('/counts');
+    const data = await response.json();
+    playCount = data.playCount;
+    downloadCount = data.downloadCount;
+    updateCounts();
+}
+
+// Increment play count on server
+async function incrementPlayCount(): Promise<void> {
     if (hasPlayed30Seconds) {
-        playCount++;
+        const response = await fetch('/increment-play', { method: 'POST' });
+        const data = await response.json();
+        playCount = data.playCount;
         updateCounts();
     }
 }
 
+// Increment download count on server
+async function incrementDownloadCount(): Promise<void> {
+    const response = await fetch('/increment-download', { method: 'POST' });
+    const data = await response.json();
+    downloadCount = data.downloadCount;
+    updateCounts();
+}
+
 // Event listener for the download button
 downloadButton.addEventListener('click', () => {
-    downloadCount++;
-    updateCounts();
-    // Simulate download action
-});
-
-// Event listener for the audio player
-audioPlayer.addEventListener('play', () => {
-    if (!hasPlayed30Seconds) {
-        playTimeout = window.setTimeout(() => {
-            incrementPlayCount();
-            hasPlayed30Seconds = true;
-        }, 30000); // 30 seconds
-    }
-});
-
-audioPlayer.addEventListener('pause', () => {
-    clearTimeout(playTimeout);
-    hasPlayed30Seconds = false;
-});
-
-audioPlayer.addEventListener('ended', () => {
-    clearTimeout(playTimeout);
-    hasPlayed30Seconds = false;
+    incrementDownloadCount();
 });
 
 // Initialize counts on page load
-updateCounts();
+fetchCounts();

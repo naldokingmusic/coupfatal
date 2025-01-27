@@ -29,7 +29,6 @@ downloadButton.addEventListener('click', () => {
     downloadCount++;
     updateCounts();
     // Simulate download action
-    alert('Téléchargement de "Coup Fatal" en cours...');
 });
 
 // Event listener for the audio player

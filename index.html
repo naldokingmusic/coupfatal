@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Naldo King - Coup Fatal</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Naldo King - Coup Fatal</title>
+    <link rel="stylesheet" href="public/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Télécharge gratuitement le dernier single de Naldo King</h1>
-    
-    <div class="audio-player">
-      <audio id="audio" controls>
-        <source src="public/assets/coupfatal.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
-    </div>
+    <div class="container">
+        <h1>Télécharge gratuitement le dernier single de Naldo King</h1>
+        <div>
+            <audio id="audioPlayer" controls onplay="incrementPlayCount()">
+                <source src="public/assets/coupfatal.mp3" type="audio/mpeg">
+                Votre navigateur ne prend pas en charge l'élément audio.
+            </audio>
+        </div>
+        <div>
+            <button id="downloadBtn" class="actions">
+                <a href="public/assets/coupfatal.mp3" download id="downloadLink">Clique ici!</a>
+            </button>
+            <p>📥 Nombre de téléchargements: <span id="downloadCount">0</span></p>
+            <p>🎧 Nombre de lectures: <span id="playCount">0</span></p>
+        </div>
 
-    <div class="stats">
-      <p>🎧 Plays: <span id="playCount">0</span></p>
-      <p>📥 Downloads: <span id="downloadCount">0</span></p>
     </div>
-
-    <div class="actions">
-      <a href="public/assets/coupfatal.mp3" download id="downloadLink">Clique ici!</a>
-    </div>
-  </div>
-
-  <script src="dist/app.js"></script> <!-- Compiled TypeScript file -->
+    <script src="dist/app.js"></script>
 </body>
 </html>

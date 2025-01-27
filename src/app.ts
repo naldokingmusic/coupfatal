@@ -46,5 +46,15 @@ downloadButton.addEventListener('click', () => {
     incrementDownloadCount();
 });
 
+// Event listener for the audio player
+audioPlayer.addEventListener('play', () => {
+    if (!hasPlayed30Seconds) {
+        playTimeout = window.setTimeout(() => {
+            hasPlayed30Seconds = true;
+            incrementPlayCount();
+        }, 30000); // 30 seconds
+    }
+});
+
 // Initialize counts on page load
 fetchCounts();

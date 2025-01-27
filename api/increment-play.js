@@ -1,4 +1,3 @@
-// filepath: /Users/anthonybgg/Documents/Codes/coupfatal/api/increment-play.js
 const fs = require('fs');
 const countsFilePath = './counts.json';
 

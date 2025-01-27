@@ -1,63 +1,56 @@
-// Import Firebase libraries
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, update, increment, onValue } from 'firebase/database';
+const downloadButton = document.getElementById('downloadBtn') as HTMLButtonElement;
+const playCountDisplay = document.getElementById('playCount') as HTMLSpanElement;
+const downloadCountDisplay = document.getElementById('downloadCount') as HTMLSpanElement;
+const audioPlayer = document.getElementById('audioPlayer') as HTMLAudioElement;
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBMKE53OF9dqNS_E_zasTEP3QmnT-3cRQ8",
-  authDomain: "coupfatal-167d4.firebaseapp.com",
-  projectId: "coupfatal-167d4",
-  storageBucket: "coupfatal-167d4.firebasestorage.app",
-  messagingSenderId: "181796402091",
-  appId: "1:181796402091:web:679bb58033a7b27f1d98ee",
-  measurementId: "G-308H2XJNMT",
-};
+let playCount: number = parseInt(localStorage.getItem('playCount') || '0');
+let downloadCount: number = parseInt(localStorage.getItem('downloadCount') || '0');
+let playTimeout: number | undefined;
+let hasPlayed30Seconds: boolean = false;
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Firebase references
-const playCountRef = ref(database, "playCount");
-const downloadCountRef = ref(database, "downloadCount");
-
-// DOM Elements
-const playCountElement = document.getElementById("playCount") as HTMLSpanElement;
-const downloadCountElement = document.getElementById("downloadCount") as HTMLSpanElement;
-const audioPlayer = document.getElementById("audio") as HTMLAudioElement;
-
-// Increment play count
-function incrementPlayCount() {
-  update(playCountRef, { count: increment(1) });
+// Function to update the display counts
+function updateCounts(): void {
+    playCountDisplay.textContent = playCount.toString();
+    downloadCountDisplay.textContent = downloadCount.toString();
+    localStorage.setItem('playCount', playCount.toString());
+    localStorage.setItem('downloadCount', downloadCount.toString());
 }
 
-// Increment download count
-function incrementDownloadCount() {
-  update(downloadCountRef, { count: increment(1) });
+// Function to increment play count
+function incrementPlayCount(): void {
+    if (hasPlayed30Seconds) {
+        playCount++;
+        updateCounts();
+    }
 }
 
-// Event listener for play (using the audio element's play event)
-audioPlayer.addEventListener("play", () => {
-  incrementPlayCount();  // Increment play count in Firebase
+// Event listener for the download button
+downloadButton.addEventListener('click', () => {
+    downloadCount++;
+    updateCounts();
+    // Simulate download action
+    alert('Téléchargement de "Coup Fatal" en cours...');
 });
 
-// Event listener for download button (on download link click)
-document.getElementById("downloadLink")!.addEventListener("click", () => {
-  incrementDownloadCount();  // Increment download count in Firebase
-  const link = document.createElement("a");
-  link.href = "assets/coupfatal.mp3";
-  link.download = "coupfatal.mp3";
-  link.click();
+// Event listener for the audio player
+audioPlayer.addEventListener('play', () => {
+    if (!hasPlayed30Seconds) {
+        playTimeout = window.setTimeout(() => {
+            incrementPlayCount();
+            hasPlayed30Seconds = true;
+        }, 30000); // 30 seconds
+    }
 });
 
-// Real-time update for play count
-onValue(playCountRef, (snapshot : any) => {
-  const count = snapshot.val() ? snapshot.val().count : 0;
-  playCountElement.textContent = count.toString();
+audioPlayer.addEventListener('pause', () => {
+    clearTimeout(playTimeout);
+    hasPlayed30Seconds = false;
 });
 
-// Real-time update for download count
-onValue(downloadCountRef, (snapshot : any) => {
-  const count = snapshot.val() ? snapshot.val().count : 0;
-  downloadCountElement.textContent = count.toString();
+audioPlayer.addEventListener('ended', () => {
+    clearTimeout(playTimeout);
+    hasPlayed30Seconds = false;
 });
+
+// Initialize counts on page load
+updateCounts();

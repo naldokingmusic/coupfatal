@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",  
-    "start": "open dist/index.html", 
+    "start": "open public/index.html", 
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"  
   },

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
+    "outDir": "./dist",
     "moduleResolution": "node",
     "strict": true,
     "typeRoots": ["node_modules/@type"],

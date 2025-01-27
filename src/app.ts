@@ -16,7 +16,7 @@ function updateCounts(): void {
 
 // Fetch counts from server
 async function fetchCounts() {
-    const response = await fetch('/counts');
+    const response = await fetch('https://coupfatal-383hqq4ch-naldo-kings-projects.vercel.app/api/counts');
     const data = await response.json();
     playCount = data.playCount;
     downloadCount = data.downloadCount;
@@ -26,7 +26,7 @@ async function fetchCounts() {
 // Increment play count on server
 async function incrementPlayCount(): Promise<void> {
     if (hasPlayed30Seconds) {
-        const response = await fetch('/increment-play', { method: 'POST' });
+        const response = await fetch('https://coupfatal-383hqq4ch-naldo-kings-projects.vercel.app/api/increment-play', { method: 'POST' });
         const data = await response.json();
         playCount = data.playCount;
         updateCounts();
@@ -35,7 +35,7 @@ async function incrementPlayCount(): Promise<void> {
 
 // Increment download count on server
 async function incrementDownloadCount(): Promise<void> {
-    const response = await fetch('/increment-download', { method: 'POST' });
+    const response = await fetch('https://coupfatal-383hqq4ch-naldo-kings-projects.vercel.app/api/increment-download', { method: 'POST' });
     const data = await response.json();
     downloadCount = data.downloadCount;
     updateCounts();

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Static site for counting plays and downloads of Naldo King's song",
   "homepage": "https://naldokingmusic.github.io/coupfatal",
-  "main": "app.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
     "start": "open index.html",
